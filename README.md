@@ -1,8 +1,39 @@
-STAR THE REPO IF YOURE COOL
+# Discord Notifier
 
-jStack - an opinionated stack to ship high-performance, low-cost Next.js apps inspired by the T3 stack.
+![thumbnail](public/thumbnail-2.png)
 
-This is an early-stage stack so probably dont use in production yet. If you're wild enough to do so despite this warning, let me know your website URL so I can feature you lol
+Generate customer discord notifications that you can integrate into any application by simply call the publicly exposed API endpoint! Here is an example below of client side code that does just that:
 
-documentation coming soon, for now just clone this repo, fill out the .env.example :))
-# discord-notifier
+```{js}
+await fetch("http://localhost:3000/api/v1/events", {
+  method: "POST",
+  body: JSON.stringify({
+    category: "sale",
+    fields: {
+      plan: "PRO",
+      email: "zoe.martinez2001@email.com",
+      amount: 49.00
+    }
+  }),
+  headers: {
+    Authorization: "Bearer <YOUR_API_KEY>"
+  }
+})
+```
+
+To start, simply create an account on the website, setup event categories that you would like our discord bot to send, and just like that, you'll be receiving custom discord notifications along with real-time analytics on our dashboard showcasing logs for all events sent through us!
+
+## Technologies Used
+
+- [Nextjs](https://nextjs.org/)
+- [Hono](https://hono.dev/)
+- [Neon](https://neon.tech/)
+- [Prisma](https://www.prisma.io/)
+- [Clerk](https://clerk.com/)
+- [Shadcn](https://ui.shadcn.com/)
+- [TanStack Table and Query](https://tanstack.com/)
+
+## Test
+
+Run the following command to view the website running locally:
+`pnpm install && pnpm dev`
