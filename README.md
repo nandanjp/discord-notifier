@@ -2,9 +2,9 @@
 
 ![thumbnail](public/thumbnail-2.png)
 
-Generate customer discord notifications that you can integrate into any application by simply call the publicly exposed API endpoint! Here is an example below of client side code that does just that:
+Generate custome discord notifications that you can integrate into any application by simply calling the publicly exposed API endpoint! Here is an example below of client side code that does just that:
 
-```{js}
+```js
 await fetch("http://localhost:3000/api/v1/events", {
   method: "POST",
   body: JSON.stringify({
@@ -12,16 +12,16 @@ await fetch("http://localhost:3000/api/v1/events", {
     fields: {
       plan: "PRO",
       email: "zoe.martinez2001@email.com",
-      amount: 49.00
-    }
+      amount: 49.0,
+    },
   }),
   headers: {
-    Authorization: "Bearer <YOUR_API_KEY>"
-  }
+    Authorization: "Bearer <YOUR_API_KEY>",
+  },
 })
 ```
 
-To start, simply create an account on the website, setup event categories that you would like our discord bot to send, and just like that, you'll be receiving custom discord notifications along with real-time analytics on our dashboard showcasing logs for all events sent through us!
+To start, create an account on the website, setup event categories that you would like our discord bot to send, and just like that, you'll be receiving custom discord notifications along with real-time analytics on our dashboard showcasing logs for all events sent through us!
 
 ## Technologies Used
 
