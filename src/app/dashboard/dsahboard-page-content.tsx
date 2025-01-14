@@ -10,6 +10,7 @@ import { format, formatDistanceToNow } from "date-fns"
 import { ArrowRight, BarChart2, Clock, Database, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { DashboardEmptyState } from "./dashboard-empty-state"
 
 export function DashboardPageContent() {
   const [deletingCategory, setDeletingCategory] = useState<string | null>(null)
@@ -42,8 +43,7 @@ export function DashboardPageContent() {
       </div>
     )
 
-  if (!categories || categories.length === 0)
-    return <div className="">Empty Stats</div>
+  if (!categories || categories.length === 0) return <DashboardEmptyState />
 
   return (
     <>

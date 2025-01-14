@@ -50,7 +50,14 @@ const EMOJI_OPTIONS = [
   { emoji: "🔔", label: "Notification" },
 ]
 
-export function CreateEventCategoryModal({ children }: PropsWithChildren) {
+interface CreateEventCategoryModal extends PropsWithChildren {
+  containerClassName?: string
+}
+
+export function CreateEventCategoryModal({
+  children,
+  containerClassName,
+}: CreateEventCategoryModal) {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
 
@@ -77,7 +84,7 @@ export function CreateEventCategoryModal({ children }: PropsWithChildren) {
 
   return (
     <>
-      <div onClick={() => setIsOpen(true)} className="">
+      <div onClick={() => setIsOpen(true)} className={containerClassName}>
         {children}
       </div>
       <Modal

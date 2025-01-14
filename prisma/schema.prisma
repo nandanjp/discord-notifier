@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
@@ -8,15 +11,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([name])
-}
-
 enum Plan {
   FREE
   PRO
@@ -25,8 +19,9 @@ enum Plan {
 model User {
   id         String  @id @default(cuid())
   externalId String? @unique
+
   quotaLimit Int
-  plan       Plan    @default(FREE)
+  plan       Plan @default(FREE)
 
   email     String   @unique
   apiKey    String   @unique @default(cuid())
@@ -34,8 +29,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  EventCateogries EventCategory[]
-  Event           Event[]
+  EventCategories EventCategory[]
+  events          Event[]
   Quota           Quota[]
 
   @@index([email, apiKey])
@@ -52,7 +47,7 @@ model EventCategory {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Event     Event[]
+  events    Event[]
 
   @@unique([name, userId])
 }
@@ -66,14 +61,17 @@ enum DeliveryStatus {
 model Event {
   id               String @id @default(cuid())
   formattedMessage String
-  user             User   @relation(fields: [userId], references: [id])
-  userId           String
-  name             String
-  fields           Json
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  name   String
+  fields Json
 
   deliveryStatus DeliveryStatus @default(PENDING)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   EventCategory   EventCategory? @relation(fields: [eventCategoryId], references: [id])
   eventCategoryId String?
@@ -84,7 +82,7 @@ model Event {
 model Quota {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id])
-  userId String
+  userId String @unique
 
   year  Int
   month Int
